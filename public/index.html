@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Serial Data  Plotter</title>
+    <script src="/node_modules/chart.js/dist/Chart.bundle.min.js"></script>
+    <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
+</head>
+<body class="container">
+    <h1>Serial Data Plotter</h1>
+    <hr>
+    <div class="row">
+        <select class="form-control" id="devices">
+            <option selected disabled>Select a serial device</option>
+        </select>
+    </div>
+    <script>
+        fetch('/devices')
+            .then(res => res.json())
+            .then((devices) => {
+                const select = document.getElementById('devices')
+                for (const device of devices) {
+                    const option = document.createElement('option')
+                    option.textContent = device
+                    option.value = device
+                    select.appendChild(option)
+                }
+            })
+    </script>
+</body>
+</html>
