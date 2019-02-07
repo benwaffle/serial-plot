@@ -28,6 +28,18 @@
                     select.appendChild(option)
                 }
             })
+
+        const ws = new WebSocket('ws://localhost:8080')
+
+        ws.onopen = () => console.log('opened websocket')
+        ws.onmessage = (ev) => {
+            console.log(ev.data)
+        }
+
+        document.getElementById('devices').addEventListener('change', (ev) => {
+            console.log(`switching to ${ev.target.value}`)
+            ws.send(JSON.stringify({ device: ev.target.value }))
+        })
     </script>
 </body>
 </html>
